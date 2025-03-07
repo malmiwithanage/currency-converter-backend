@@ -10,19 +10,19 @@ const {
 
 const router = express.Router()
 
-// Get all workouts
+// Get all transactions
 router.get('/', getWorkouts)
 
-// Get single workout
+// Get single transaction
 router.get('/:id', getWorkout)
 
-// Post a new workout
+// Post a new transaction
 router.post('/', createWorkout)
 
-// Delete a workout
+// Delete a transaction
 router.delete('/:id', deleteWorkout)
 
-// Update a workout
+// Update a transaction
 router.patch('/:id', updateWorkout)
 
 module.exports = router

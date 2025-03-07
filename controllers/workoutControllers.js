@@ -1,7 +1,7 @@
 const Workout = require('../models/workoutModel')
 const mongoose = require('mongoose')
 
-// Get all workouts
+// Get all transactions
 const getWorkouts = async (req, res) => {
     try {
         const workouts = await Workout.find({})
@@ -12,7 +12,7 @@ const getWorkouts = async (req, res) => {
 }
 
 
-// Get a single workout
+// Get a single transaction
 const getWorkout = async (req, res) => {
     const { id } = req.params
 
@@ -33,7 +33,7 @@ const getWorkout = async (req, res) => {
     }
 }
 
-// Create new workout
+// Create new transaction
 const createWorkout = async (req, res) => {
     const { fromCountry, toCountry, fromCurrency, toCurrency, exchangeRate, amount, convertedAmount, date, time } = req.body
 
@@ -46,7 +46,7 @@ const createWorkout = async (req, res) => {
     }
 }
 
-// Delete a workout
+// Delete a transaction
 const deleteWorkout = async (req, res) => {
     const { id } = req.params
 
@@ -67,7 +67,7 @@ const deleteWorkout = async (req, res) => {
     }
 }
 
-// Update a workout
+// Update a transaction
 const updateWorkout = async (req, res) => {
     const { id } = req.params
 
