@@ -1,50 +1,96 @@
 const Workout = require('../models/workoutModel')
 const mongoose = require('mongoose')
 
-//get all workouts
+// Get all workouts
 const getWorkouts = async (req, res) => {
-    const workouts = await Workout.find({}).sort({createdAt: -1})
-
-    res.status(200).json(workouts)
+    try {
+        const workouts = await Workout.find({}).sort({ createdAt: -1 })
+        res.status(200).json(workouts)
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
 }
 
+// Get a single workout
+const getWorkout = async (req, res) => {
+    const { id } = req.params
 
-//get a single workout
-const getWorkout = async (req, res) =>{
-    const {id} = req.params
-
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: 'No such workout'})
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such workout' })
     }
 
-    const workout = await Workout.findById(id)
+    try {
+        const workout = await Workout.findById(id)
 
-    if (!workout) {
-        return res.status(404).json({error: 'No such record'})
-    }
+        if (!workout) {
+            return res.status(404).json({ error: 'No such record' })
+        }
 
-    res.status(200).json(workout)
-}
-
-//create new workout
-const createWorkout = async (req, res) => {
-    const {fromCountry, toCountry, fromCurrency, toCurrency, exchangeRate, amount, convertedAmount, date, time} = req.body
-
-    //add doc to db
-    try{
-        const workout = await Workout.create({fromCountry, toCountry, fromCurrency, toCurrency, exchangeRate, amount, convertedAmount, date, time})
         res.status(200).json(workout)
     } catch (error) {
-        res.status(400).json({error: error.message})
+        res.status(500).json({ error: error.message })
     }
 }
 
-//delete a workout
+// Create new workout
+const createWorkout = async (req, res) => {
+    const { fromCountry, toCountry, fromCurrency, toCurrency, exchangeRate, amount, convertedAmount, date, time } = req.body
 
-//update a workout
+    // Add doc to db
+    try {
+        const workout = await Workout.create({ fromCountry, toCountry, fromCurrency, toCurrency, exchangeRate, amount, convertedAmount, date, time })
+        res.status(201).json(workout)
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+}
+
+// Delete a workout
+const deleteWorkout = async (req, res) => {
+    const { id } = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such workout' })
+    }
+
+    try {
+        const workout = await Workout.findByIdAndDelete(id)
+
+        if (!workout) {
+            return res.status(404).json({ error: 'No such record' })
+        }
+
+        res.status(200).json({ message: 'Workout deleted' })
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+}
+
+// Update a workout
+const updateWorkout = async (req, res) => {
+    const { id } = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such workout' })
+    }
+
+    try {
+        const workout = await Workout.findByIdAndUpdate(id, req.body, { new: true })
+
+        if (!workout) {
+            return res.status(404).json({ error: 'No such record' })
+        }
+
+        res.status(200).json(workout)
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+}
 
 module.exports = {
     createWorkout,
     getWorkout,
-    getWorkouts
+    getWorkouts,
+    deleteWorkout,
+    updateWorkout
 }
