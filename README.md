@@ -4,7 +4,7 @@ This is the live backend server for the Currency Converter application, providin
 
 ## Live Server
 
-[Currency Converter Server](https://currency-converter-backend-vercel-fix.vercel.app/api/)
+[Currency Converter Server](https://currency-converter-backend-vercel-fix.vercel.app/api/workouts)
 
 ## Endpoints
 
