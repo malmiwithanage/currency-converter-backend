@@ -12,7 +12,7 @@ This is the live backend server for the Currency Converter application.
 
 **GET /workouts**
 
-**Description**: Fetches all workout-related data from the server.
+**Description**: Fetches all transactions related data from the server.
 
 ## Deployment
 
