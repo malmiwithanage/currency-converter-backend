@@ -2,7 +2,7 @@
 
 This is the live backend server for the Currency Converter application, providing endpoints to fetch and manage transaction data.
 
-## Base URL
+## Live Server
 
 [Currency Converter Server](https://currency-converter-backend-vercel-fix.vercel.app/api/)
 
