@@ -83,7 +83,3 @@ This backend is deployed on Vercel for seamless and efficient performance. It pr
     ```bash
     npm run dev
     ```
-
-## License
-
-This project is open-source and available under the [MIT License](LICENSE).
